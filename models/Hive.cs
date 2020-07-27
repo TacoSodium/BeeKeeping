@@ -5,24 +5,15 @@ namespace models
 {
     public class Hive
     {
-        public string HiveName;
+        public string Name;
         public List<Bee> BeeList;
         public int MaxBees;
 
         public Hive()
         {
-            this.HiveName = "New Hive";
+            this.Name = "New Hive";
             this.MaxBees = 6;
             this.BeeList = new List<Bee>();
-        }
-
-        public void SetHiveName (string hiveName) {
-            this.HiveName = hiveName;
-        }
-
-        public void ChangeHiveSize(int newSize)
-        {
-            this.MaxBees = newSize;
         }
 
         public void AddBeeToHive(Bee newBee)
