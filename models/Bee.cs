@@ -3,9 +3,9 @@ namespace models
     public class Bee
     {
         public string Name;
-        public int Size;
+        public double Size;
 
-        public Bee(string name, int size)
+        public Bee(string name, double size)
         {
             this.Name = name;
             this.Size = size;

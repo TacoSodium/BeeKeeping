@@ -5,13 +5,19 @@ namespace models
 {
     public class Hive
     {
+        public string HiveName;
         public List<Bee> BeeList;
         public int MaxBees;
 
         public Hive()
         {
+            this.HiveName = "New Hive";
             this.MaxBees = 6;
             this.BeeList = new List<Bee>();
+        }
+
+        public void SetHiveName (string hiveName) {
+            this.HiveName = hiveName;
         }
 
         public void ChangeHiveSize(int newSize)
@@ -31,18 +37,19 @@ namespace models
             }
         }
 
-        public void CollectHoney(int days)
+        public void CollectHoney(double days)
         {
-            int honeyAmount = 0;
-        
+            double honeyAmount = 0;
+
             if (this.BeeList.Count == 0)
             {
                 Console.WriteLine("This hive is empty. Add bees to start collecting honey");
             }
             else
             {
-                for (int i = 0; i < BeeList.Count; i++) {
-                    honeyAmount = days *  * 0.2;
+                for (int i = 0; i < BeeList.Count; i++)
+                {
+                    honeyAmount = days * this.BeeList[i].Size * 0.2;
                 }
             }
         }
