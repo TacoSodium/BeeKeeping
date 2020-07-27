@@ -28,20 +28,22 @@ namespace models
             }
         }
 
-        public void CollectHoney(double days)
+        public string CollectHoney(double days)
         {
             double honeyAmount = 0;
 
             if (this.BeeList.Count == 0)
             {
-                Console.WriteLine("This hive is empty. Add bees to start collecting honey");
+                return "This hive is empty. Add bees to start collecting honey";
             }
             else
             {
                 for (int i = 0; i < BeeList.Count; i++)
                 {
-                    honeyAmount = days * this.BeeList[i].Size * 0.2;
+                    honeyAmount += days * this.BeeList[i].Size * 0.2;
                 }
+
+                return $"{honeyAmount} litres of Honey was collected";
             }
         }
     }
