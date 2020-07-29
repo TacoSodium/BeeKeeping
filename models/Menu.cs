@@ -14,7 +14,7 @@ namespace models
 
         public void Start()
         {
-            Console.WriteLine("WELCOME TO BEE KEEPER\n");
+            Console.WriteLine("\nWELCOME TO BEE KEEPER\n");
             Console.WriteLine("1. Create new Hive");
             Console.WriteLine("2. Collect Honey");
             Console.WriteLine("3. Report on Bees");
@@ -84,38 +84,48 @@ namespace models
 
         public void RunCollectHoney()
         {
-            Console.WriteLine();
-            foreach (Hive hive in HiveList)
+            if (this.HiveList.Count == 0)
             {
-                Console.WriteLine(hive.Name);
+                Console.WriteLine("You don't have any Hives. Create one to start collecting honey");
             }
-
-            Console.WriteLine();
-            Console.WriteLine("Which Hive would you like to collect from?");
-            string hiveSelect = Console.ReadLine();
-
-            for (int i = 0; i < HiveList.Count; i++)
+            else
             {
-                if (HiveList[i].Name == hiveSelect)
+                Console.WriteLine();
+                foreach (Hive hive in HiveList)
                 {
-                    Console.WriteLine("How many days would you like to collect?");
-                    string daysSelect = Console.ReadLine();
+                    Console.WriteLine(hive.Name);
+                }
 
-                    if (IsValid(daysSelect) == true)
+                Console.WriteLine();
+                Console.WriteLine("Which Hive would you like to collect from?");
+                string hiveSelect = Console.ReadLine().ToLower();
+
+                for (int i = 0; i < HiveList.Count; i++)
+                {
+                    if (HiveList[i].Name.ToLower() == hiveSelect)
                     {
-                        double daysDouble = double.Parse(daysSelect);
-                        HiveList[i].CollectHoney(daysDouble);
+                        Console.WriteLine("How many days would you like to collect?");
+                        string daysSelect = Console.ReadLine();
+                        Console.WriteLine();
+
+                        if (IsValid(daysSelect) == true)
+                        {
+                            double daysDouble = double.Parse(daysSelect);
+                            Console.WriteLine(HiveList[i].CollectHoney(daysDouble));
+                            Console.WriteLine();
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Please enter a valid number of days");
+                            RunCollectHoney();
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Please enter a valid number of days");
+                        Console.WriteLine("That hive doesn't exist. Choose one from the list");
                         RunCollectHoney();
                     }
-                }
-                else
-                {
-                    Console.WriteLine("That hive doesn't exist. Choose one from the list");
-                    RunCollectHoney();
                 }
             }
 
@@ -124,26 +134,34 @@ namespace models
 
         public void ReportBeeCount()
         {
-            Console.WriteLine();
-            foreach (Hive hive in HiveList)
+            if (this.HiveList.Count == 0)
             {
-                Console.WriteLine(hive.Name);
+                Console.WriteLine("You don't have any Hives. Create one to get a report on your Bees");
             }
-
-            Console.WriteLine();
-            Console.WriteLine("Which Hive would you like to collect from?");
-            string hiveSelect = Console.ReadLine();
-
-            for (int i = 0; i < HiveList.Count; i++)
+            else
             {
-                if (HiveList[i].Name == hiveSelect)
+                Console.WriteLine();
+                foreach (Hive hive in HiveList)
                 {
-                    Console.WriteLine($"This Hive contains {HiveList[i].BeeList.Count} bees");
+                    Console.WriteLine(hive.Name);
                 }
-                else
+
+                Console.WriteLine();
+                Console.WriteLine("Which Hive would you like to collect from?");
+                string hiveSelect = Console.ReadLine().ToLower();
+                Console.WriteLine();
+
+                for (int i = 0; i < HiveList.Count; i++)
                 {
-                    Console.WriteLine("That hive doesn't exist. Choose one from the list");
-                    ReportBeeCount();
+                    if (HiveList[i].Name.ToLower() == hiveSelect)
+                    {
+                        Console.WriteLine($"This Hive contains {HiveList[i].BeeList.Count} bees");
+                    }
+                    else
+                    {
+                        Console.WriteLine("That hive doesn't exist. Choose one from the list");
+                        ReportBeeCount();
+                    }
                 }
             }
 
