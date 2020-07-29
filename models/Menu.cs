@@ -23,9 +23,8 @@ namespace models
         {
             Console.WriteLine();
             Console.WriteLine("1. Create new Hive");
-            Console.WriteLine("2. Hiveless Bees");
-            Console.WriteLine("3. Collect Honey");
-            Console.WriteLine("4. Report on Bees");
+            Console.WriteLine("2. Collect Honey");
+            Console.WriteLine("3. Report on Bees");
             string userSelect = Console.ReadLine();
 
             switch (userSelect)
@@ -34,12 +33,9 @@ namespace models
                     CreateNewHive();
                     break;
                 case "2":
-                    AddBees();
-                    break;
-                case "3":
                     RunCollectHoney();
                     break;
-                case "4":
+                case "3":
                     ReportBeeCount();
                     break;
                 default:
@@ -51,6 +47,14 @@ namespace models
 
         public void CreateNewHive()
         {
+            Bee beeJohn = new Bee("John", 3.2);
+            Bee beePaul = new Bee("Paul", 2.7);
+            Bee beeGeorge = new Bee("George", 1.1);
+            Bee beeRingo = new Bee("Ringo", 2.0);
+            Bee beeKurt = new Bee("Kurt", 2.3);
+            Bee beeDave = new Bee("Dave", 7.4);
+            Bee beeKrist = new Bee("Krist", 1.5);
+
             Hive newHive = new Hive();
 
             Console.WriteLine();
@@ -65,41 +69,23 @@ namespace models
                 string hiveName = Console.ReadLine();
                 newHive.Name = hiveName;
 
-                this.HiveList.Add(newHive);
-
-                MenuScreen();
-            }
-        }
-
-        public void AddBees()
-        {
-            Bee beeJohn = new Bee("John", 3.2);
-            Bee beePaul = new Bee("Paul", 2.7);
-            Bee beeGeorge = new Bee("George", 1.1);
-            Bee beeRingo = new Bee("Ringo", 2.0);
-            Bee beeKurt = new Bee("Kurt", 2.3);
-            Bee beeDave = new Bee("Dave", 7.4);
-            Bee beeKrist = new Bee("Krist", 1.5);
-
-            List<Bee> hivelessBees = new List<Bee>() { beeJohn, beePaul, beeGeorge, beeRingo, beeKurt, beeDave, beeKrist };
-
-            Console.WriteLine();
-            if (hivelessBees.Count == 0)
-            {
-                Console.WriteLine("There are no Hiveless Bees at the moment. Come back later.");
-                MenuScreen();
-            }
-            else
-            {
-                foreach (Bee bee in hivelessBees)
+                if (this.HiveList.Count == 0)
                 {
-                    Console.WriteLine(bee.Name);
+                    newHive.BeeList.Add(beeJohn);
+                    newHive.BeeList.Add(beePaul);
+                    newHive.BeeList.Add(beeGeorge);
+                    newHive.BeeList.Add(beeRingo);
                 }
-            }
+                else
+                {
+                    newHive.BeeList.Add(beeKurt);
+                    newHive.BeeList.Add(beeDave);
+                    newHive.BeeList.Add(beeKrist);
+                }
 
-            Console.WriteLine();
-            Console.WriteLine("Which Bee would you like to home?");
-            string beeSelect = Console.ReadLine();
+                this.HiveList.Add(newHive);
+                MenuScreen();
+            }
         }
 
         public void RunCollectHoney()
