@@ -15,13 +15,6 @@ namespace models
         public void Start()
         {
             Console.WriteLine("WELCOME TO BEE KEEPER\n");
-            Console.Write("Please name your first hive:");
-            CreateNewHive();
-        }
-
-        public void MenuScreen()
-        {
-            Console.WriteLine();
             Console.WriteLine("1. Create new Hive");
             Console.WriteLine("2. Collect Honey");
             Console.WriteLine("3. Report on Bees");
@@ -40,37 +33,34 @@ namespace models
                     break;
                 default:
                     Console.WriteLine("That is not a valid option");
-                    MenuScreen();
+                    Start();
                     break;
             }
         }
 
         public void CreateNewHive()
         {
-            Bee beeJohn = new Bee("John", 3.2);
-            Bee beePaul = new Bee("Paul", 2.7);
-            Bee beeGeorge = new Bee("George", 1.1);
-            Bee beeRingo = new Bee("Ringo", 2.0);
-            Bee beeKurt = new Bee("Kurt", 2.3);
-            Bee beeDave = new Bee("Dave", 7.4);
-            Bee beeKrist = new Bee("Krist", 1.5);
-
-            Hive newHive = new Hive();
-
             Console.WriteLine();
             if (this.HiveList.Count == 2)
             {
                 Console.WriteLine("Two Hives is enough for now");
-                MenuScreen();
+                Start();
             }
             else
             {
+                Hive newHive = new Hive();
+
                 Console.WriteLine("Name your new Hive: ");
                 string hiveName = Console.ReadLine();
                 newHive.Name = hiveName;
 
                 if (this.HiveList.Count == 0)
                 {
+                    Bee beeJohn = new Bee("John", 3.2);
+                    Bee beePaul = new Bee("Paul", 2.7);
+                    Bee beeGeorge = new Bee("George", 1.1);
+                    Bee beeRingo = new Bee("Ringo", 2.0);
+
                     newHive.BeeList.Add(beeJohn);
                     newHive.BeeList.Add(beePaul);
                     newHive.BeeList.Add(beeGeorge);
@@ -78,13 +68,17 @@ namespace models
                 }
                 else
                 {
+                    Bee beeKurt = new Bee("Kurt", 2.3);
+                    Bee beeDave = new Bee("Dave", 7.4);
+                    Bee beeKrist = new Bee("Krist", 1.5);
+
                     newHive.BeeList.Add(beeKurt);
                     newHive.BeeList.Add(beeDave);
                     newHive.BeeList.Add(beeKrist);
                 }
 
                 this.HiveList.Add(newHive);
-                MenuScreen();
+                Start();
             }
         }
 
@@ -125,7 +119,7 @@ namespace models
                 }
             }
 
-            MenuScreen();
+            Start();
         }
 
         public void ReportBeeCount()
@@ -153,7 +147,7 @@ namespace models
                 }
             }
 
-            MenuScreen();
+            Start();
         }
 
         public bool IsValid(string input)
